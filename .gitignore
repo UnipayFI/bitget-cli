@@ -1,0 +1,3 @@
+bitget-cli
+*.test
+.DS_Store
