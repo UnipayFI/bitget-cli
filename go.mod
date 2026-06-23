@@ -3,7 +3,7 @@ module github.com/UnipayFI/bitget-cli
 go 1.26.0
 
 require (
-	github.com/UnipayFI/go-bitget v0.20260618.0
+	github.com/UnipayFI/go-bitget v0.20260618.1
 	github.com/olekukonko/tablewriter v1.0.9
 	github.com/shopspring/decimal v1.4.0
 	github.com/spf13/cobra v1.9.1
