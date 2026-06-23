@@ -181,6 +181,20 @@ func (a *AccountSummary) Row() [][]any {
 	return [][]any{{a.AccountEquity, a.UsdtEquity, a.BtcEquity, a.UnrealisedPnl, a.EffEquity, a.Imr, a.Mmr, a.MgnRatio}}
 }
 
+// AccountHealthView renders the unified account's risk/health metrics: account
+// and effective equity, unrealised PnL, initial/maintenance margin requirements
+// (IMR/MMR) and the margin ratio. A margin ratio approaching 1 (100%) signals
+// liquidation risk.
+type AccountHealthView bguta.AccountAssets
+
+func (a *AccountHealthView) Header() []string {
+	return []string{"Account Equity", "Eff Equity", "Unrealised PNL", "IMR", "MMR", "Mgn Ratio"}
+}
+
+func (a *AccountHealthView) Row() [][]any {
+	return [][]any{{a.AccountEquity, a.EffEquity, a.UnrealisedPnl, a.Imr, a.Mmr, a.MgnRatio}}
+}
+
 // AccountInfoView renders account identity and permission metadata.
 type AccountInfoView bguta.AccountInfo
 

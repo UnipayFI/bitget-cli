@@ -38,10 +38,11 @@ type Client struct {
 	uta *bguta.UTAClient
 }
 
-// NewClient builds an authenticated UTA client from the global config and
-// best-effort syncs the server clock so signed requests carry an accepted
-// timestamp.
-func NewClient() *Client {
+// BuildOptions assembles the shared SDK client options (auth, proxy, locale,
+// base URL, demo, silent logging) from the global config. Both the UTA and the
+// classic-account client wrappers build on top of this so credential and
+// transport handling stay identical across account systems.
+func BuildOptions() []client.Options {
 	opts := []client.Options{
 		client.WithAuth(config.Config.APIKey, config.Config.APISecret, config.Config.Passphrase),
 		client.WithLogger(silentLogger{}),
@@ -58,8 +59,14 @@ func NewClient() *Client {
 	if config.Config.Demo {
 		opts = append(opts, client.WithDemoTrading(true))
 	}
+	return opts
+}
 
-	c := bitget.NewUTAClient(opts...)
+// NewClient builds an authenticated UTA client from the global config and
+// best-effort syncs the server clock so signed requests carry an accepted
+// timestamp.
+func NewClient() *Client {
+	c := bitget.NewUTAClient(BuildOptions()...)
 	ctx, cancel := context.WithTimeout(context.Background(), requestTimeout)
 	defer cancel()
 	_ = c.SyncServerTime(ctx)

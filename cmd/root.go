@@ -9,9 +9,16 @@ import (
 
 var RootCmd = &cobra.Command{
 	Use:   "bitget-cli",
-	Short: "Bitget UTA (Unified Trading Account) API for CLI",
-	Long: `bitget-cli is a command-line client for Bitget's Unified Trading Account
-(UTA) private REST API: spot and futures trading, account, positions and funds.
+	Short: "Bitget API CLI for the Unified (UTA) and classic accounts",
+	Long: `bitget-cli is a command-line client for Bitget's private REST APIs, covering
+both of Bitget's account systems:
+
+  UTA      Unified Trading Account (v3 /api/v3/*): run "bitget-cli UTA ..."
+  spot     Classic spot account (v2 /api/v2/spot/*)
+  futures  Classic futures account (v2 /api/v2/mix/*)
+
+The top-level spot/futures commands target the classic account; the unified
+account lives under the UTA subcommand.
 
 Credentials are read from the environment:
   BITGET_API_KEY, BITGET_API_SECRET, BITGET_PASSPHRASE   (required)
@@ -19,7 +26,7 @@ Credentials are read from the environment:
 
 Use --json on any command for the raw API response.
 
-Docs Link: https://www.bitget.com/api-doc/uta/intro`,
+Docs Link: https://www.bitget.com/api-doc/common/intro`,
 	PersistentPreRunE: checkCredentials,
 	SilenceUsage:      true,
 	SilenceErrors:     true,

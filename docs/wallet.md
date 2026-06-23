@@ -3,7 +3,7 @@
 > Every command in this module accepts a global `--json` flag that prints the
 > raw API response as indented JSON instead of a table.
 
-Exec: `./bitget-cli wallet [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA wallet [Subcommand] [Arguments]`
 
 Account types used by transfers: `spot`, `p2p`, `coin_futures`, `usdt_futures`,
 `usdc_futures`, `crossed_margin`, `isolated_margin`, `uta`.
@@ -23,7 +23,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/account/Transfer>
 
 Transfer a coin between two account types within the same account.
 
-Exec: `./bitget-cli wallet transfer --fromType=spot --toType=usdt_futures --coin=USDT --amount=10`
+Exec: `./bitget-cli UTA wallet transfer --fromType=spot --toType=usdt_futures --coin=USDT --amount=10`
 ```shell
 ┌─────────────────────┬─────────────────────┐
 │     TRANSFER ID     │     CLIENT OID      │
@@ -45,7 +45,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/account/Transfer>
 
 List the coins transferable between two account types.
 
-Exec: `./bitget-cli wallet transferable-coins --fromType=spot --toType=usdt_futures`
+Exec: `./bitget-cli UTA wallet transferable-coins --fromType=spot --toType=usdt_futures`
 ```shell
 ┌──────┐
 │ COIN │
@@ -60,12 +60,12 @@ Docs Link: <https://www.bitget.com/api-doc/uta/account/Deposit>
 
 Get the on-chain deposit address for a coin, optionally on a chain.
 
-Exec: `./bitget-cli wallet deposit address --coin=USDT [--chain=trc20]`
+Exec: `./bitget-cli UTA wallet deposit address --coin=USDT [--chain=trc20]`
 ```shell
 ┌──────┬───────┬────────────────────────────────────────────┬─────┐
 │ COIN │ CHAIN │                  ADDRESS                   │ TAG │
 ├──────┼───────┼────────────────────────────────────────────┼─────┤
-│ USDT │ ERC20 │ 0x88c379e744c0c297b9110d70d706bd4545f0542f │     │
+│ USDT │ ERC20 │ 0x0000000000000000000000000000000000000000 │     │
 └──────┴───────┴────────────────────────────────────────────┴─────┘
 ```
 
@@ -74,7 +74,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/account/Deposit>
 
 List deposit records. The time window defaults to the last 30 days.
 
-Exec: `./bitget-cli wallet deposit records [--coin=USDT] [--limit=20]`
+Exec: `./bitget-cli UTA wallet deposit records [--coin=USDT] [--limit=20]`
 
 **Supported parameters:**
 - `--coin, -c`: coin filter
@@ -88,11 +88,11 @@ Submit a withdrawal (on-chain or internal). Use with care.
 
 **On-chain:**
 ```shell
-./bitget-cli wallet withdraw create --coin=USDT --transferType=on_chain --chain=trc20 --address=Txxxx --size=10
+./bitget-cli UTA wallet withdraw create --coin=USDT --transferType=on_chain --chain=trc20 --address=Txxxx --size=10
 ```
 **Internal (by UID):**
 ```shell
-./bitget-cli wallet withdraw create --coin=USDT --transferType=internal_transfer --address=123456 --size=10
+./bitget-cli UTA wallet withdraw create --coin=USDT --transferType=internal_transfer --address=123456 --size=10
 ```
 **Supported parameters:**
 - `--coin, -c`: coin (required)
@@ -109,20 +109,20 @@ Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
 
 List withdrawal records. The time window defaults to the last 30 days.
 
-Exec: `./bitget-cli wallet withdraw records [--coin=USDT] [--limit=20]`
+Exec: `./bitget-cli UTA wallet withdraw records [--coin=USDT] [--limit=20]`
 
 ## withdraw - address
 Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
 
 List the saved withdrawal address book entries.
 
-Exec: `./bitget-cli wallet withdraw address [--coin=USDT] [--type=EVM]`
+Exec: `./bitget-cli UTA wallet withdraw address [--coin=USDT] [--type=EVM]`
 
 ## withdraw - cancel
 Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
 
 Cancel a withdrawal still within its cooling-off period.
 
-Exec: `./bitget-cli wallet withdraw cancel --orderId=xxx`
+Exec: `./bitget-cli UTA wallet withdraw cancel --orderId=xxx`
 
 Identify by `--orderId` or `--clientOid`.

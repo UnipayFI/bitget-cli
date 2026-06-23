@@ -7,7 +7,7 @@ The product line is selected with the persistent `--category` / `-C` flag
 (default `usdt-futures`); it applies to every subcommand:
 `usdt-futures` (`usdt`), `coin-futures` (`coin`), `usdc-futures` (`usdc`).
 
-Exec: `./bitget-cli futures [--category=usdt-futures] [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA futures [--category=usdt-futures] [Subcommand] [Arguments]`
 
 ## Quick Navigation
 - [order create](#order---create)
@@ -30,11 +30,11 @@ Place a new futures order. The created order's identifiers are printed back.
 
 **Limit, hedge mode:**
 ```shell
-./bitget-cli futures order create --symbol=BTCUSDT --side=buy --type=limit --qty=0.001 --price=50000 --posSide=long
+./bitget-cli UTA futures order create --symbol=BTCUSDT --side=buy --type=limit --qty=0.001 --price=50000 --posSide=long
 ```
 **Market, USDC futures:**
 ```shell
-./bitget-cli futures --category=usdc-futures order create --symbol=BTCPERP --side=sell --type=market --qty=0.001
+./bitget-cli UTA futures --category=usdc-futures order create --symbol=BTCPERP --side=sell --type=market --qty=0.001
 ```
 **Supported parameters:**
 - `--symbol, -s`: symbol (required)
@@ -51,25 +51,25 @@ Place a new futures order. The created order's identifiers are printed back.
 ## order - cancel
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-Order>
 ```shell
-./bitget-cli futures order cancel --orderId=xxx
+./bitget-cli UTA futures order cancel --orderId=xxx
 ```
 
 ## order - modify
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Modify-Order>
 ```shell
-./bitget-cli futures order modify --orderId=xxx --price=51000
+./bitget-cli UTA futures order modify --orderId=xxx --price=51000
 ```
 
 ## order - get
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Details>
 ```shell
-./bitget-cli futures order get --orderId=xxx
+./bitget-cli UTA futures order get --orderId=xxx
 ```
 
 ## order - open
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Open-Orders>
 
-Exec: `./bitget-cli futures order open [--symbol=BTCUSDT]`
+Exec: `./bitget-cli UTA futures order open [--symbol=BTCUSDT]`
 
 Columns: Order ID, Symbol, Side, Type, Status, Price, Qty, Filled, Avg Price,
 TIF, Pos Side, Reduce, Created.
@@ -77,21 +77,21 @@ TIF, Pos Side, Reduce, Created.
 ## order - history
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-History>
 
-Exec: `./bitget-cli futures order history [--symbol=BTCUSDT] [--limit=20]`
+Exec: `./bitget-cli UTA futures order history [--symbol=BTCUSDT] [--limit=20]`
 
 ## order - cancel-all
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Orders>
 
 Cancel all open orders in the category, optionally limited to one `--symbol`.
 
-Exec: `./bitget-cli futures order cancel-all [--symbol=BTCUSDT]`
+Exec: `./bitget-cli UTA futures order cancel-all [--symbol=BTCUSDT]`
 
 ## position - list
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Position-Info>
 
 List the account's open positions in the category.
 
-Exec: `./bitget-cli futures position list [--symbol=BTCUSDT] [--posSide=long]`
+Exec: `./bitget-cli UTA futures position list [--symbol=BTCUSDT] [--posSide=long]`
 ```shell
 ┌────────┬──────────┬─────────────┬──────────┬───────┬───────────┬───────────┬────────────┬───────────┬────────────────┬─────────────┬─────────────┐
 │ SYMBOL │ POS SIDE │ MARGIN MODE │ LEVERAGE │ TOTAL │ AVAILABLE │ AVG PRICE │ MARK PRICE │ LIQ PRICE │ UNREALISED PNL │ PROFIT RATE │ MARGIN COIN │
@@ -103,7 +103,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Positions-History>
 
 List closed/historical positions (90-day window).
 
-Exec: `./bitget-cli futures position history [--symbol=BTCUSDT] [--limit=20]`
+Exec: `./bitget-cli UTA futures position history [--symbol=BTCUSDT] [--limit=20]`
 
 Columns: Symbol, Pos Side, Open Avg, Close Avg, Open Qty, Close Qty,
 Realised PNL, Net Profit, Funding, Created, Updated.
@@ -113,7 +113,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Position-ADL-Rank>
 
 Show the auto-deleveraging (ADL) rank for each open position.
 
-Exec: `./bitget-cli futures position adl-rank`
+Exec: `./bitget-cli UTA futures position adl-rank`
 
 ## position - close
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Close-All-Positions>
@@ -121,14 +121,14 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Close-All-Positions>
 Market-close positions. Without `--symbol` closes all in the category; without
 `--posSide` closes both sides.
 
-Exec: `./bitget-cli futures position close [--symbol=BTCUSDT] [--posSide=long]`
+Exec: `./bitget-cli UTA futures position close [--symbol=BTCUSDT] [--posSide=long]`
 
 ## fills
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Fill-History>
 
 List futures trade fills (90-day access window).
 
-Exec: `./bitget-cli futures fills [--orderId=xxx] [--limit=3]`
+Exec: `./bitget-cli UTA futures fills [--orderId=xxx] [--limit=3]`
 ```shell
 ┌─────────────────────┬─────────────────────┬─────────┬──────┬────────────┬──────────┬────────────┬───────┬─────────────────┬────────┬─────────────────────┐
 │       EXEC ID       │      ORDER ID       │ SYMBOL  │ SIDE │ EXEC PRICE │ EXEC QTY │ EXEC VALUE │ SCOPE │       FEE       │  PNL   │        TIME         │

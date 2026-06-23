@@ -5,7 +5,7 @@
 
 All spot commands target the `SPOT` category.
 
-Exec: `./bitget-cli spot [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA spot [Subcommand] [Arguments]`
 
 ## Quick Navigation
 - [order create](#order---create)
@@ -24,11 +24,11 @@ Place a new spot order. The created order's identifiers are printed back.
 
 **Limit order:**
 ```shell
-./bitget-cli spot order create --symbol=BTCUSDT --side=buy --type=limit --qty=0.0001 --price=30000
+./bitget-cli UTA spot order create --symbol=BTCUSDT --side=buy --type=limit --qty=0.0001 --price=30000
 ```
 **Market order:**
 ```shell
-./bitget-cli spot order create --symbol=ETHUSDT --side=sell --type=market --qty=0.01
+./bitget-cli UTA spot order create --symbol=ETHUSDT --side=sell --type=market --qty=0.01
 ```
 ```shell
 ┌─────────────────────┬─────────────────────┐
@@ -51,7 +51,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-Order>
 
 Cancel a single spot order by `--orderId` or `--clientOid`.
 ```shell
-./bitget-cli spot order cancel --orderId=1452849501609095168
+./bitget-cli UTA spot order cancel --orderId=1452849501609095168
 ```
 
 ## order - modify
@@ -59,7 +59,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Modify-Order>
 
 Amend a spot order's quantity and/or price.
 ```shell
-./bitget-cli spot order modify --orderId=xxx --price=31000 --qty=0.0002
+./bitget-cli UTA spot order modify --orderId=xxx --price=31000 --qty=0.0002
 ```
 Identify the order by `--orderId` or `--clientOid`; supply at least one of
 `--qty` / `--price`.
@@ -68,7 +68,7 @@ Identify the order by `--orderId` or `--clientOid`; supply at least one of
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Details>
 
 ```shell
-./bitget-cli spot order get --orderId=1452849501609095168
+./bitget-cli UTA spot order get --orderId=1452849501609095168
 ```
 
 ## order - open
@@ -76,7 +76,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Open-Orders>
 
 List currently open (unfilled / partially filled) spot orders.
 
-Exec: `./bitget-cli spot order open [--symbol=BTCUSDT]`
+Exec: `./bitget-cli UTA spot order open [--symbol=BTCUSDT]`
 ```shell
 ┌─────────────────────┬─────────┬──────┬───────┬────────┬───────┬────────┬────────┬───────────┬─────┬──────────┬────────┬─────────────────────┐
 │      ORDER ID       │ SYMBOL  │ SIDE │ TYPE  │ STATUS │ PRICE │  QTY   │ FILLED │ AVG PRICE │ TIF │ POS SIDE │ REDUCE │       CREATED       │
@@ -90,7 +90,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-History>
 
 List historical spot orders (90-day access window).
 
-Exec: `./bitget-cli spot order history [--symbol=BTCUSDT] [--limit=20]`
+Exec: `./bitget-cli UTA spot order history [--symbol=BTCUSDT] [--limit=20]`
 
 **Supported parameters:**
 - `--symbol, -s`: symbol filter
@@ -103,14 +103,14 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Orders>
 Cancel all open spot orders, optionally limited to one `--symbol`. The response
 lists each attempted cancellation with its per-order result code.
 
-Exec: `./bitget-cli spot order cancel-all [--symbol=BTCUSDT]`
+Exec: `./bitget-cli UTA spot order cancel-all [--symbol=BTCUSDT]`
 
 ## fills
 Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Fill-History>
 
 List spot trade fills (90-day access window).
 
-Exec: `./bitget-cli spot fills [--orderId=xxx] [--limit=20]`
+Exec: `./bitget-cli UTA spot fills [--orderId=xxx] [--limit=20]`
 
 **Supported parameters:**
 - `--orderId, -i`: order id filter

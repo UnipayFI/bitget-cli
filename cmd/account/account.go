@@ -31,6 +31,18 @@ Docs Link: ` + docBase + "Get-Account",
 		RunE: showEquity,
 	}
 
+	healthCmd = &cobra.Command{
+		Use:   "health",
+		Short: "Show unified account health (margin ratio & risk)",
+		Long: `Show the unified trading account's risk/health metrics: account and
+effective equity, unrealised PnL, initial/maintenance margin requirements
+(IMR/MMR) and the margin ratio. A margin ratio approaching 1 (100%) signals
+liquidation risk.
+
+Docs Link: ` + docBase + "Get-Account",
+		RunE: showHealth,
+	}
+
 	infoCmd = &cobra.Command{
 		Use:   "info",
 		Short: "Show account identity and permissions",
@@ -185,7 +197,7 @@ func InitCmds() []*cobra.Command {
 	setMarginCmd.MarkFlagRequired("amount")
 
 	return []*cobra.Command{
-		assetsCmd, equityCmd, infoCmd, settingsCmd, leverageConfigCmd,
+		assetsCmd, equityCmd, healthCmd, infoCmd, settingsCmd, leverageConfigCmd,
 		feeRateCmd, fundingAssetsCmd, billsCmd, maxTransferableCmd, maxWithdrawalCmd,
 		setLeverageCmd, setHoldModeCmd, setMarginCmd,
 	}
@@ -207,6 +219,16 @@ func showEquity(cmd *cobra.Command, _ []string) error {
 	}
 	summary := exchange.AccountSummary(*assets)
 	printer.Print(&summary)
+	return nil
+}
+
+func showHealth(cmd *cobra.Command, _ []string) error {
+	assets, err := exchange.NewClient().GetAccountAssets()
+	if err != nil {
+		return err
+	}
+	view := exchange.AccountHealthView(*assets)
+	printer.Print(&view)
 	return nil
 }
 

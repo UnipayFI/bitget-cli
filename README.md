@@ -1,13 +1,19 @@
 # Bitget CLI
 
-A command-line tool for the Bitget API developed in Go, supporting spot and
-futures trading on the Unified Trading Account (UTA).
+A command-line tool for the Bitget API developed in Go, supporting both of
+Bitget's account systems:
 
-Built on the Bitget UTA v3 REST API (`/api/v3/*`) with HMAC-SHA256 signing
-(`ACCESS-KEY` / `ACCESS-SIGN` / `ACCESS-TIMESTAMP` / `ACCESS-PASSPHRASE`).
-Only authenticated (private) endpoints are covered — public market data is out
-of scope. The unified account serves spot and every futures line from one
-client; the product is chosen per command via the *category*.
+- **Unified Trading Account (UTA)** — the v3 REST API (`/api/v3/*`), reached
+  under the `UTA` subcommand (`./bitget-cli UTA ...`). The unified account
+  serves spot and every futures line from one client; the product is chosen per
+  command via the *category*.
+- **Classic account** — the v2 REST API (`/api/v2/*`), reached through the
+  top-level `spot` and `futures` commands.
+
+Both use HMAC-SHA256 signing (`ACCESS-KEY` / `ACCESS-SIGN` /
+`ACCESS-TIMESTAMP` / `ACCESS-PASSPHRASE`) with the same credentials. Only
+authenticated (private) endpoints are covered — public market data is out of
+scope.
 
 ## Installation and Configuration
 
@@ -44,28 +50,39 @@ export BITGET_DEMO="true"                       # use demo (paper) trading
 Every command supports a global `--json` flag. Without it, results render as a
 table; with it, the raw API response is printed as indented JSON, e.g.:
 ```shell
-./bitget-cli account assets --json
+./bitget-cli UTA account assets --json
 ```
 
 ## Usage
-All commands follow this format:
+Top-level commands split by account system:
 ```
-./bitget-cli [Module] [Subcommand] [Arguments]
+./bitget-cli [Command] [Subcommand] [Arguments]
 
 Available Commands:
-  account     Account info, balances, settings and leverage
-  spot        Spot trading (orders & fills)
-  futures     Futures trading (orders, positions & fills)
-  wallet      Funds: transfer, deposit and withdrawal
+  UTA         Unified Trading Account (UTA) commands (v3 /api/v3/*)
+  spot        Classic spot trading (account, balances & orders) (v2)
+  futures     Classic futures trading (account, positions & orders) (v2)
   version     Print version information
 ```
 
 Each leaf subcommand's `-h` output includes a `Docs Link:` pointing to the
 official Bitget API documentation page for that endpoint.
 
+## UTA (Unified Trading Account)
+All unified-account features live under the `UTA` subcommand:
+```
+./bitget-cli UTA [Module] [Subcommand] [Arguments]
+
+Available Commands:
+  account     Account info, balances, settings and leverage
+  spot        Spot trading (orders & fills)
+  futures     Futures trading (orders, positions & fills)
+  wallet      Funds: transfer, deposit and withdrawal
+```
+
 ### Category
-Spot commands always target the `SPOT` category. Futures commands accept a
-persistent `--category` / `-C` flag (default `usdt-futures`):
+UTA spot commands always target the `SPOT` category. UTA futures commands accept
+a persistent `--category` / `-C` flag (default `usdt-futures`):
 
 | alias | category      |
 |-------|---------------|
@@ -76,11 +93,12 @@ persistent `--category` / `-C` flag (default `usdt-futures`):
 | `margin` | MARGIN |
 
 ### Account Module
-Exec: `./bitget-cli account [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA account [Subcommand] [Arguments]`
 ```shell
 Available Commands:
   assets            Show unified account per-coin balances (non-zero)
   equity            Show unified account aggregate equity and margin
+  health            Show unified account health (margin ratio & risk)
   info              Show account identity and permissions
   settings          Show account mode settings
   leverage-config   Show per-symbol leverage / margin configuration
@@ -96,7 +114,7 @@ Available Commands:
 **[View detailed documentation](docs/account.md)**
 
 ### Spot Module
-Exec: `./bitget-cli spot [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA spot [Subcommand] [Arguments]`
 ```shell
 Available Commands:
   order       Create, modify, cancel and query spot orders
@@ -105,7 +123,7 @@ Available Commands:
 **[View detailed documentation](docs/spot.md)**
 
 ### Futures Module
-Exec: `./bitget-cli futures [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA futures [Subcommand] [Arguments]`
 ```shell
 Available Commands:
   order       Create, modify, cancel and query futures orders
@@ -115,7 +133,7 @@ Available Commands:
 **[View detailed documentation](docs/futures.md)**
 
 ### Wallet Module
-Exec: `./bitget-cli wallet [Subcommand] [Arguments]`
+Exec: `./bitget-cli UTA wallet [Subcommand] [Arguments]`
 ```shell
 Available Commands:
   transfer            Transfer a coin between account types
@@ -125,5 +143,48 @@ Available Commands:
 ```
 **[View detailed documentation](docs/wallet.md)**
 
+## Classic account
+The top-level `spot` and `futures` commands target the classic account
+(v2 `/api/v2/*`) and cover the basic operations: account info, balances,
+positions, account health and order create/cancel/query.
+
+### Product (classic futures)
+Classic futures commands accept a persistent `--product` / `-P` flag
+(default `usdt-futures`): `usdt` / `coin` / `usdc` → `USDT-FUTURES` /
+`COIN-FUTURES` / `USDC-FUTURES`.
+
+### Classic Spot
+Exec: `./bitget-cli spot [Subcommand] [Arguments]`
+```shell
+Available Commands:
+  account     Spot account info and balances
+    info        Show spot account identity and permissions
+    assets      Show spot per-coin balances (non-zero)
+  order       Create, cancel and query spot orders
+    create      Create a spot order
+    cancel      Cancel a spot order
+    get         Query a single spot order
+    open        List open spot orders
+```
+**[View detailed documentation](docs/classic-spot.md)**
+
+### Classic Futures
+Exec: `./bitget-cli futures [Subcommand] [Arguments]`
+```shell
+Available Commands:
+  account     Show futures account balances and equity
+  health      Show futures account health (risk rate & maintenance margin)
+  position    Query futures positions
+    list        List open positions
+  order       Create, cancel and query futures orders
+    create      Create a futures order
+    cancel      Cancel a futures order
+    get         Query a single futures order
+    open        List open futures orders
+```
+**[View detailed documentation](docs/classic-futures.md)**
+
 ## Official API documentation
-<https://www.bitget.com/api-doc/uta/intro>
+- UTA: <https://www.bitget.com/api-doc/uta/intro>
+- Classic spot: <https://www.bitget.com/api-doc/spot/intro>
+- Classic futures: <https://www.bitget.com/api-doc/contract/intro>
