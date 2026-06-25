@@ -1,12 +1,10 @@
-github.com/UnipayFI/go-bitget v0.20260618.0 h1:0dmduJnO6lI/h9aTDgsM07nlRcueeUKDHec6fWOEvmE=
-github.com/UnipayFI/go-bitget v0.20260618.0/go.mod h1:ns3S3vrEpa+6zC8//MyS7Pz0pYfw/b72i+wJBWQVAlg=
-github.com/UnipayFI/go-bitget v0.20260618.1 h1:DfX56jmIYimwKrJ0XEbFGibWb1q5IhK79Gl5eNbRyWY=
-github.com/UnipayFI/go-bitget v0.20260618.1/go.mod h1:ns3S3vrEpa+6zC8//MyS7Pz0pYfw/b72i+wJBWQVAlg=
+github.com/UnipayFI/go-bitget v0.20260625.2 h1:Y7SnYySrGGTUKsno8v6PZ3oitk78O3hMWb/mWmDfJZ8=
+github.com/UnipayFI/go-bitget v0.20260625.2/go.mod h1:PIPg/V/0WBpyoMWQMSxUvTvn9LtDgLADlWL4u+SpYjs=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/fatih/color v1.15.0 h1:kOqh6YHBtK8aywxGerMG2Eq3H6Qgoqeo13Bk2Mv/nBs=
 github.com/fatih/color v1.15.0/go.mod h1:0h5ZqXfHYED7Bhv2ZJamyIOUej9KtShiJESRwBDUSsw=
-github.com/go-json-experiment/json v0.0.0-20260601182631-00ed12fed2a6 h1:nxP4pPoyqOAgX8lYDFCfl3DyKeXErCvSvhcyzwGV9CE=
-github.com/go-json-experiment/json v0.0.0-20260601182631-00ed12fed2a6/go.mod h1:tphK2c80bpPhMOI4v6bIc2xWywPfbqi1Z06+RcrMkDg=
+github.com/go-json-experiment/json v0.0.0-20260504200034-64a0a05799db h1:EWTZKWQtY8ZehowJ8hV1E0GJEBiL2a0eJ7Zd/CU448w=
+github.com/go-json-experiment/json v0.0.0-20260504200034-64a0a05799db/go.mod h1:tphK2c80bpPhMOI4v6bIc2xWywPfbqi1Z06+RcrMkDg=
 github.com/go-resty/resty/v2 v2.17.2 h1:FQW5oHYcIlkCNrMD2lloGScxcHJ0gkjshV3qcQAyHQk=
 github.com/go-resty/resty/v2 v2.17.2/go.mod h1:kCKZ3wWmwJaNc7S29BRtUhJwy7iqmn+2mLtQrOyQlVA=
 github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
