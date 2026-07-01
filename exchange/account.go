@@ -1,6 +1,8 @@
 package exchange
 
 import (
+	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -84,7 +86,11 @@ func (c *Client) GetFinancialRecords(p FinancialRecordsParams) (*bguta.Financial
 		s.SetEndTime(p.EndTime)
 	}
 	if p.Limit != "" {
-		s.SetLimit(p.Limit)
+		n, err := strconv.Atoi(p.Limit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid limit %q: %w", p.Limit, err)
+		}
+		s.SetLimit(n)
 	}
 	return s.Do(cx)
 }
@@ -104,7 +110,11 @@ type SetLeverageParams struct {
 func (c *Client) SetLeverage(p SetLeverageParams) (string, error) {
 	cx, cancel := ctx()
 	defer cancel()
-	s := c.uta.NewSetLeverageService(p.Category, p.Leverage)
+	lev, err := strconv.Atoi(p.Leverage)
+	if err != nil {
+		return "", fmt.Errorf("invalid leverage %q: %w", p.Leverage, err)
+	}
+	s := c.uta.NewSetLeverageService(p.Category, lev)
 	if p.Symbol != "" {
 		s.SetSymbol(p.Symbol)
 	}
@@ -165,7 +175,7 @@ func (a CoinAssets) Row() [][]any {
 		if c.Equity.IsZero() && c.Balance.IsZero() && c.Available.IsZero() && c.Debt.IsZero() {
 			continue
 		}
-		rows = append(rows, []any{c.Coin, c.Equity, c.Balance, c.Available, c.Locked, c.Debt, c.UsdValue})
+		rows = append(rows, []any{c.Coin, c.Equity, c.Balance, c.Available, c.Locked, c.Debt, c.USDValue})
 	}
 	return rows
 }
@@ -178,7 +188,7 @@ func (a *AccountSummary) Header() []string {
 }
 
 func (a *AccountSummary) Row() [][]any {
-	return [][]any{{a.AccountEquity, a.UsdtEquity, a.BtcEquity, a.UnrealisedPnl, a.EffEquity, a.Imr, a.Mmr, a.MgnRatio}}
+	return [][]any{{a.AccountEquity, a.USDTEquity, a.BtcEquity, a.UnrealizedPnL, a.EffEquity, a.Imr, a.Mmr, a.MgnRatio}}
 }
 
 // AccountHealthView renders the unified account's risk/health metrics: account
@@ -192,7 +202,7 @@ func (a *AccountHealthView) Header() []string {
 }
 
 func (a *AccountHealthView) Row() [][]any {
-	return [][]any{{a.AccountEquity, a.EffEquity, a.UnrealisedPnl, a.Imr, a.Mmr, a.MgnRatio}}
+	return [][]any{{a.AccountEquity, a.EffEquity, a.UnrealizedPnL, a.Imr, a.Mmr, a.MgnRatio}}
 }
 
 // AccountInfoView renders account identity and permission metadata.
@@ -204,7 +214,7 @@ func (a *AccountInfoView) Header() []string {
 
 func (a *AccountInfoView) Row() [][]any {
 	perms := strings.Join(a.Permissions, ",")
-	return [][]any{{a.UserId, a.ParentId, a.PermType, perms, a.Ips, common.FormatTime(a.RegisTime)}}
+	return [][]any{{a.UserID, a.ParentID, a.PermType, perms, a.Ips, common.FormatTime(a.RegisTime)}}
 }
 
 // AccountSettingsView renders the account-mode header of the settings payload.
@@ -215,7 +225,7 @@ func (a *AccountSettingsView) Header() []string {
 }
 
 func (a *AccountSettingsView) Row() [][]any {
-	return [][]any{{a.Uid, a.AccountMode, a.AssetMode, a.AccountLevel, a.HoldMode, a.StpMode}}
+	return [][]any{{a.UID, a.AccountMode, a.AssetMode, a.AccountLevel, a.HoldMode, a.StpMode}}
 }
 
 // LeverageConfigs renders the per-symbol leverage/margin configuration list.
@@ -296,5 +306,5 @@ func (m *MaxWithdrawalView) Header() []string {
 }
 
 func (m *MaxWithdrawalView) Row() [][]any {
-	return [][]any{{m.Coin, m.UtaMaxWithdrawal, m.SpotMaxWithdrawal, m.OtcMaxWithdrawal, m.TotalMaxWithdrawal}}
+	return [][]any{{m.Coin, m.UtaMaxWithdrawal, m.SpotMaxWithdrawal, m.OTCMaxWithdrawal, m.TotalMaxWithdrawal}}
 }

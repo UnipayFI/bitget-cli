@@ -185,7 +185,7 @@ func createOrder(cmd *cobra.Command, _ []string) error {
 	if err != nil {
 		return err
 	}
-	printer.Print(&classic.SpotOrderRefView{OrderID: ref.OrderID, ClientOid: ref.ClientOid})
+	printer.Print(&classic.SpotOrderRefView{OrderID: ref.OrderID, ClientOid: ref.ClientOrderID})
 	return nil
 }
 
@@ -200,7 +200,7 @@ func cancelOrder(cmd *cobra.Command, _ []string) error {
 	if err != nil {
 		return err
 	}
-	printer.Print(&classic.SpotOrderRefView{OrderID: ref.OrderID, ClientOid: ref.ClientOid})
+	printer.Print(&classic.SpotOrderRefView{OrderID: ref.OrderID, ClientOid: ref.ClientOrderID})
 	return nil
 }
 

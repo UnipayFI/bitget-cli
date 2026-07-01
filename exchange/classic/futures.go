@@ -113,7 +113,7 @@ func (c *FuturesClient) PlaceOrder(p FuturesPlaceOrderParams) (*mix.OrderRef, er
 		s.SetReduceOnly(mix.ReduceOnlyNo)
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	return s.Do(cx)
 }
@@ -126,10 +126,10 @@ func (c *FuturesClient) CancelOrder(symbol string, pt mix.ProductType, marginCoi
 		s.SetMarginCoin(marginCoin)
 	}
 	if orderID != "" {
-		s.SetOrderId(orderID)
+		s.SetOrderID(orderID)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -139,10 +139,10 @@ func (c *FuturesClient) GetOrderDetail(symbol string, pt mix.ProductType, orderI
 	defer cancel()
 	s := c.mx.NewGetOrderDetailService(symbol, pt)
 	if orderID != "" {
-		s.SetOrderId(orderID)
+		s.SetOrderID(orderID)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -174,7 +174,7 @@ func (a FuturesAccountRows) Row() [][]any {
 	rows := [][]any{}
 	for _, ac := range a {
 		rows = append(rows, []any{
-			ac.MarginCoin, ac.AccountEquity, ac.UsdtEquity, ac.Available, ac.Locked,
+			ac.MarginCoin, ac.AccountEquity, ac.USDTEquity, ac.Available, ac.Locked,
 			ac.CrossedMaxAvailable, ac.UnrealizedPL, ac.MaxTransferOut,
 		})
 	}
@@ -227,7 +227,7 @@ func (o *FuturesOrderRefView) Header() []string {
 }
 
 func (o *FuturesOrderRefView) Row() [][]any {
-	return [][]any{{o.OrderId, o.ClientOid}}
+	return [][]any{{o.OrderID, o.ClientOrderID}}
 }
 
 // FuturesOrderRows renders queried futures orders (detail / open list).
@@ -245,7 +245,7 @@ func (o FuturesOrderRows) Row() [][]any {
 			status = ord.State
 		}
 		rows = append(rows, []any{
-			ord.OrderId, ord.Symbol, ord.Side, ord.OrderType, status,
+			ord.OrderID, ord.Symbol, ord.Side, ord.OrderType, status,
 			ord.Price, ord.Size, ord.PriceAvg, ord.BaseVolume, ord.Leverage,
 			ord.MarginMode, ord.ReduceOnly, common.FormatTime(ord.CTime),
 		})

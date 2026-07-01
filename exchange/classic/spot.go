@@ -91,7 +91,7 @@ func (c *SpotClient) PlaceOrder(p SpotPlaceOrderParams) (*spot.PlaceOrderRespons
 		s.SetPrice(p.Price)
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	return s.Do(cx)
 }
@@ -104,7 +104,7 @@ func (c *SpotClient) CancelOrder(symbol, orderID, clientOid string) (*spot.Cance
 		s.SetOrderID(orderID)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -117,7 +117,7 @@ func (c *SpotClient) GetOrderInfo(orderID, clientOid string) ([]spot.OrderInfo, 
 		s.SetOrderID(orderID)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -165,7 +165,7 @@ func (a *SpotAccountInfoView) Header() []string {
 
 func (a *SpotAccountInfoView) Row() [][]any {
 	return [][]any{{
-		a.UserId, a.ParentId, a.TraderType,
+		a.UserID, a.ParentID, a.TraderType,
 		strings.Join(a.Authorities, ","), strings.Join(a.Ips, ","), common.FormatTime(a.RegisTime),
 	}}
 }

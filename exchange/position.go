@@ -72,7 +72,7 @@ func (p Positions) Row() [][]any {
 	for _, pos := range p {
 		rows = append(rows, []any{
 			pos.Symbol, pos.PosSide, pos.MarginMode, pos.Leverage, pos.Total, pos.Available,
-			pos.AvgPrice, pos.MarkPrice, pos.LiquidationPrice, pos.UnrealisedPnl, pos.ProfitRate, pos.MarginCoin,
+			pos.AvgPrice, pos.MarkPrice, pos.LiquidationPrice, pos.UnrealizedPnL, pos.ProfitRate, pos.MarginCoin,
 		})
 	}
 	return rows
@@ -90,7 +90,7 @@ func (p PositionHistoryRows) Row() [][]any {
 	for _, pos := range p {
 		rows = append(rows, []any{
 			pos.Symbol, pos.PosSide, pos.OpenPriceAvg, pos.ClosePriceAvg, pos.OpenTotalPos, pos.CloseTotalPos,
-			pos.CumRealisedPnl, pos.NetProfit, pos.TotalFunding, common.FormatTime(pos.CreatedTime), common.FormatTime(pos.UpdatedTime),
+			pos.CumRealisedPnL, pos.NetProfit, pos.TotalFunding, common.FormatTime(pos.CreatedTime), common.FormatTime(pos.UpdatedTime),
 		})
 	}
 	return rows
@@ -106,7 +106,7 @@ func (a ADLRankRows) Header() []string {
 func (a ADLRankRows) Row() [][]any {
 	rows := [][]any{}
 	for _, r := range a {
-		rows = append(rows, []any{r.Symbol, r.MarginCoin, r.HoldSide, r.AdlRank})
+		rows = append(rows, []any{r.Symbol, r.MarginCoin, r.HoldSide, r.ADLRank})
 	}
 	return rows
 }
@@ -121,7 +121,7 @@ func (o OrderResults) Header() []string {
 func (o OrderResults) Row() [][]any {
 	rows := [][]any{}
 	for _, r := range o {
-		rows = append(rows, []any{r.OrderID, r.ClientOid, r.Code, r.Msg})
+		rows = append(rows, []any{r.OrderID, r.ClientOrderID, r.Code, r.Msg})
 	}
 	return rows
 }

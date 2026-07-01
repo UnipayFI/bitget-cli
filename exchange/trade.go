@@ -2,6 +2,7 @@ package exchange
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -43,13 +44,13 @@ func (c *Client) PlaceOrder(p PlaceOrderParams) (*bguta.OrderRef, error) {
 		s.SetPosSide(bguta.PosSide(p.PosSide))
 	}
 	if p.ReduceOnly != "" {
-		s.SetReduceOnly(p.ReduceOnly)
+		s.SetReduceOnly(bguta.ReduceOnly(p.ReduceOnly))
 	}
 	if p.MarginMode != "" {
 		s.SetMarginMode(bguta.MarginMode(p.MarginMode))
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	return s.Do(cx)
 }
@@ -73,10 +74,10 @@ func (c *Client) ModifyOrder(p ModifyOrderParams) (*bguta.OrderRef, error) {
 		s.SetSymbol(p.Symbol)
 	}
 	if p.OrderId != "" {
-		s.SetOrderId(p.OrderId)
+		s.SetOrderID(p.OrderId)
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	if !p.Qty.IsZero() {
 		s.SetQty(p.Qty)
@@ -92,10 +93,10 @@ func (c *Client) CancelOrder(category bguta.Category, orderId, clientOid string)
 	defer cancel()
 	s := c.uta.NewCancelOrderService().SetCategory(category)
 	if orderId != "" {
-		s.SetOrderId(orderId)
+		s.SetOrderID(orderId)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -118,7 +119,7 @@ func (c *Client) GetOrderInfo(orderId, clientOid string) (*bguta.Order, error) {
 		s.SetOrderID(orderId)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	return s.Do(cx)
 }
@@ -131,7 +132,11 @@ func (c *Client) GetOpenOrders(category bguta.Category, symbol, limit string) (*
 		s.SetSymbol(symbol)
 	}
 	if limit != "" {
-		s.SetLimit(limit)
+		n, err := strconv.Atoi(limit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid limit %q: %w", limit, err)
+		}
+		s.SetLimit(n)
 	}
 	return s.Do(cx)
 }
@@ -160,7 +165,11 @@ func (c *Client) GetOrderHistory(p HistoryParams) (*bguta.OrderList, error) {
 		s.SetEndTime(p.EndTime)
 	}
 	if p.Limit != "" {
-		s.SetLimit(p.Limit)
+		n, err := strconv.Atoi(p.Limit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid limit %q: %w", p.Limit, err)
+		}
+		s.SetLimit(n)
 	}
 	return s.Do(cx)
 }
@@ -179,7 +188,11 @@ func (c *Client) GetFills(p HistoryParams) (*bguta.FillList, error) {
 		s.SetEndTime(p.EndTime)
 	}
 	if p.Limit != "" {
-		s.SetLimit(p.Limit)
+		n, err := strconv.Atoi(p.Limit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid limit %q: %w", p.Limit, err)
+		}
+		s.SetLimit(n)
 	}
 	return s.Do(cx)
 }
@@ -225,7 +238,7 @@ func (o *OrderRefView) Header() []string {
 }
 
 func (o *OrderRefView) Row() [][]any {
-	return [][]any{{o.OrderId, o.ClientOid}}
+	return [][]any{{o.OrderID, o.ClientOrderID}}
 }
 
 // CancelResults renders the per-order outcome of a bulk cancellation.
@@ -238,7 +251,7 @@ func (c CancelResults) Header() []string {
 func (c CancelResults) Row() [][]any {
 	rows := [][]any{}
 	for _, r := range c {
-		rows = append(rows, []any{r.OrderId, r.ClientOid, r.Code, r.Msg})
+		rows = append(rows, []any{r.OrderID, r.ClientOrderID, r.Code, r.Msg})
 	}
 	return rows
 }
@@ -256,7 +269,7 @@ func (f FillRows) Row() [][]any {
 		rows = append(rows, []any{
 			fill.ExecID, fill.OrderID, fill.Symbol, fill.Side, fill.ExecPrice,
 			fill.ExecQty, fill.ExecValue, fill.TradeScope, formatFees(fill.FeeDetail),
-			fill.ExecPnl, common.FormatTime(fill.CreatedTime),
+			fill.ExecPnL, common.FormatTime(fill.CreatedTime),
 		})
 	}
 	return rows

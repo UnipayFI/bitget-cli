@@ -32,7 +32,7 @@ func (c *Client) Transfer(p TransferParams) (*bguta.TransferResult, error) {
 		s.SetAllowBorrow(p.AllowBorrow)
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	return s.Do(cx)
 }
@@ -97,7 +97,7 @@ func (c *Client) Withdraw(p WithdrawParams) (*bguta.WithdrawResult, error) {
 		s.SetRemark(p.Remark)
 	}
 	if p.ClientOid != "" {
-		s.SetClientOid(p.ClientOid)
+		s.SetClientOrderID(p.ClientOid)
 	}
 	return s.Do(cx)
 }
@@ -136,7 +136,7 @@ func (c *Client) CancelWithdrawal(orderId, clientOid string) (string, error) {
 		s.SetOrderID(orderId)
 	}
 	if clientOid != "" {
-		s.SetClientOid(clientOid)
+		s.SetClientOrderID(clientOid)
 	}
 	res, err := s.Do(cx)
 	if err != nil {
@@ -155,7 +155,7 @@ func (t *TransferResultView) Header() []string {
 }
 
 func (t *TransferResultView) Row() [][]any {
-	return [][]any{{t.TransferId, t.ClientOid}}
+	return [][]any{{t.TransferID, t.ClientOrderID}}
 }
 
 // CoinList renders a bare list of coin names (e.g. transferable coins).
@@ -207,7 +207,7 @@ func (w *WithdrawResultView) Header() []string {
 }
 
 func (w *WithdrawResultView) Row() [][]any {
-	return [][]any{{w.OrderID, w.ClientOid}}
+	return [][]any{{w.OrderID, w.ClientOrderID}}
 }
 
 // WithdrawalRecords renders the account's withdrawal history.
