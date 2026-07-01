@@ -40,7 +40,9 @@ export BITGET_API_SECRET="..."        # API secret
 export BITGET_PASSPHRASE="..."        # passphrase set when the key was created
 
 # Optional
-export BITGET_PROXY="socks5://127.0.0.1:1080"  # route REST traffic through a proxy
+export HTTPS_PROXY="socks5://127.0.0.1:1080"    # route REST traffic through a proxy
+                                                # (HTTPS_PROXY > ALL_PROXY > HTTP_PROXY;
+                                                #  supports http/https/socks5/socks5h)
 export BITGET_LOCALE="en-US"                    # error-message language (default en-US)
 export BITGET_BASE_URL="https://api.bitget.com" # override REST base URL
 export BITGET_DEMO="true"                       # use demo (paper) trading

@@ -22,7 +22,8 @@ account lives under the UTA subcommand.
 
 Credentials are read from the environment:
   BITGET_API_KEY, BITGET_API_SECRET, BITGET_PASSPHRASE   (required)
-  BITGET_PROXY, BITGET_LOCALE, BITGET_BASE_URL, BITGET_DEMO   (optional)
+  BITGET_LOCALE, BITGET_BASE_URL, BITGET_DEMO   (optional)
+  HTTPS_PROXY / ALL_PROXY / HTTP_PROXY   (optional, standard proxy vars)
 
 Use --json on any command for the raw API response.
 

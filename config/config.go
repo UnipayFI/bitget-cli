@@ -23,7 +23,7 @@ func init() {
 	Config.APIKey = os.Getenv("BITGET_API_KEY")
 	Config.APISecret = os.Getenv("BITGET_API_SECRET")
 	Config.Passphrase = os.Getenv("BITGET_PASSPHRASE")
-	Config.Proxy = os.Getenv("BITGET_PROXY")
+	Config.Proxy = proxyFromEnv()
 	Config.Locale = os.Getenv("BITGET_LOCALE")
 	Config.BaseURL = os.Getenv("BITGET_BASE_URL")
 	if v := os.Getenv("BITGET_DEMO"); v != "" {
@@ -31,4 +31,21 @@ func init() {
 			Config.Demo = b
 		}
 	}
+}
+
+// proxyFromEnv resolves the REST proxy from the standard proxy environment
+// variables. All Bitget REST traffic is HTTPS, so the scheme-specific
+// HTTPS_PROXY wins, then the ALL_PROXY catch-all, then HTTP_PROXY as a
+// last resort; each is honored in both upper- and lower-case spelling.
+func proxyFromEnv() string {
+	for _, name := range []string{
+		"HTTPS_PROXY", "https_proxy",
+		"ALL_PROXY", "all_proxy",
+		"HTTP_PROXY", "http_proxy",
+	} {
+		if v := os.Getenv(name); v != "" {
+			return v
+		}
+	}
+	return ""
 }
