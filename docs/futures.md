@@ -67,7 +67,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Details>
 ```
 
 ## order - open
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Open-Orders>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Pending>
 
 Exec: `./bitget-cli UTA futures order open [--symbol=BTCUSDT]`
 
@@ -80,14 +80,14 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-History>
 Exec: `./bitget-cli UTA futures order history [--symbol=BTCUSDT] [--limit=20]`
 
 ## order - cancel-all
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Orders>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Order>
 
 Cancel all open orders in the category, optionally limited to one `--symbol`.
 
 Exec: `./bitget-cli UTA futures order cancel-all [--symbol=BTCUSDT]`
 
 ## position - list
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Position-Info>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Position>
 
 List the account's open positions in the category.
 
@@ -99,7 +99,7 @@ Exec: `./bitget-cli UTA futures position list [--symbol=BTCUSDT] [--posSide=long
 ```
 
 ## position - history
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Positions-History>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Position-History>
 
 List closed/historical positions (90-day window).
 
@@ -124,7 +124,7 @@ Market-close positions. Without `--symbol` closes all in the category; without
 Exec: `./bitget-cli UTA futures position close [--symbol=BTCUSDT] [--posSide=long]`
 
 ## fills
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Fill-History>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Fills>
 
 List futures trade fills (90-day access window).
 

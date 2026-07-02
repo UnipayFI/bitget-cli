@@ -72,7 +72,7 @@ Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Details>
 ```
 
 ## order - open
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Open-Orders>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Pending>
 
 List currently open (unfilled / partially filled) spot orders.
 
@@ -98,7 +98,7 @@ Exec: `./bitget-cli UTA spot order history [--symbol=BTCUSDT] [--limit=20]`
 - `--limit, -l`: max records
 
 ## order - cancel-all
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Orders>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Cancel-All-Order>
 
 Cancel all open spot orders, optionally limited to one `--symbol`. The response
 lists each attempted cancellation with its per-order result code.
@@ -106,7 +106,7 @@ lists each attempted cancellation with its per-order result code.
 Exec: `./bitget-cli UTA spot order cancel-all [--symbol=BTCUSDT]`
 
 ## fills
-Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Fill-History>
+Docs Link: <https://www.bitget.com/api-doc/uta/trade/Get-Order-Fills>
 
 List spot trade fills (90-day access window).
 

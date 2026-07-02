@@ -20,7 +20,7 @@ var (
 		Long: `Transfer a coin between two account types within the same account.
 * Account types: spot, p2p, coin_futures, usdt_futures, usdc_futures, crossed_margin, isolated_margin, uta
 
-Docs Link: ` + docBase + "Transfer",
+Docs Link: ` + docBase + "transfer",
 		RunE: doTransfer,
 	}
 
@@ -29,7 +29,7 @@ Docs Link: ` + docBase + "Transfer",
 		Short: "List coins transferable between two account types",
 		Long: `List the coins that can be transferred between the given account types.
 
-Docs Link: ` + docBase + "Transfer",
+Docs Link: ` + docBase + "transfer/Get-Transfer-Coins",
 		RunE: transferableCoins,
 	}
 
@@ -43,7 +43,7 @@ Docs Link: ` + docBase + "Transfer",
 		Short: "Get on-chain deposit address",
 		Long: `Get the on-chain deposit address for a coin, optionally on a chain.
 
-Docs Link: ` + docBase + "Deposit",
+Docs Link: ` + docBase + "deposit/Get-Deposit-Address",
 		RunE: depositAddress,
 	}
 
@@ -52,7 +52,7 @@ Docs Link: ` + docBase + "Deposit",
 		Short: "List deposit records",
 		Long: `List deposit records within a time window (default: last 30 days).
 
-Docs Link: ` + docBase + "Deposit",
+Docs Link: ` + docBase + "deposit/Get-Deposit-Records",
 		RunE: depositRecords,
 	}
 
@@ -69,7 +69,7 @@ Docs Link: ` + docBase + "Deposit",
 * Required: --coin, --transferType (on_chain | internal_transfer), --address, --size
 * --chain is required for on-chain withdrawals
 
-Docs Link: ` + docBase + "Withdrawal",
+Docs Link: ` + docBase + "withdrawal",
 		RunE: doWithdraw,
 	}
 
@@ -78,7 +78,7 @@ Docs Link: ` + docBase + "Withdrawal",
 		Short: "List withdrawal records",
 		Long: `List withdrawal records within a time window (default: last 30 days).
 
-Docs Link: ` + docBase + "Withdrawal",
+Docs Link: ` + docBase + "withdrawal/Get-Withdrawal-Records",
 		RunE: withdrawRecords,
 	}
 
@@ -87,7 +87,7 @@ Docs Link: ` + docBase + "Withdrawal",
 		Short: "List saved withdrawal addresses",
 		Long: `List the saved withdrawal address book entries.
 
-Docs Link: ` + docBase + "Withdrawal",
+Docs Link: ` + docBase + "withdrawal/Get-Withdraw-Address",
 		RunE: withdrawAddress,
 	}
 
@@ -97,7 +97,7 @@ Docs Link: ` + docBase + "Withdrawal",
 		Long: `Cancel a withdrawal still within its cooling-off period.
 * Identify by --orderId or --clientOid.
 
-Docs Link: ` + docBase + "Withdrawal",
+Docs Link: ` + docBase + "withdrawal/Cancel-Withdrawal",
 		RunE: cancelWithdraw,
 	}
 )

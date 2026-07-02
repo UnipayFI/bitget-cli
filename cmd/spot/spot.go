@@ -66,7 +66,7 @@ Docs Link: ` + docBase + "Get-Order-Details",
 		Short: "List open spot orders",
 		Long: `List currently open (unfilled / partially filled) spot orders.
 
-Docs Link: ` + docBase + "Get-Open-Orders",
+Docs Link: ` + docBase + "Get-Order-Pending",
 		RunE: openOrders,
 	}
 
@@ -84,7 +84,7 @@ Docs Link: ` + docBase + "Get-Order-History",
 		Short: "Cancel all open spot orders",
 		Long: `Cancel all open spot orders, optionally limited to one --symbol.
 
-Docs Link: ` + docBase + "Cancel-All-Orders",
+Docs Link: ` + docBase + "Cancel-All-Order",
 		RunE: cancelAll,
 	}
 
@@ -93,7 +93,7 @@ Docs Link: ` + docBase + "Cancel-All-Orders",
 		Short: "List spot trade fills",
 		Long: `List spot trade fills, bounded to a 90-day access window.
 
-Docs Link: ` + docBase + "Get-Fill-History",
+Docs Link: ` + docBase + "Get-Order-Fills",
 		RunE: listFills,
 	}
 )

@@ -64,7 +64,7 @@ Docs Link: ` + docBase + "Get-Order-Details",
 		Short: "List open futures orders",
 		Long: `List currently open (unfilled / partially filled) futures orders.
 
-Docs Link: ` + docBase + "Get-Open-Orders",
+Docs Link: ` + docBase + "Get-Order-Pending",
 		RunE: openOrders,
 	}
 
@@ -82,7 +82,7 @@ Docs Link: ` + docBase + "Get-Order-History",
 		Short: "Cancel all open futures orders",
 		Long: `Cancel all open futures orders in the category, optionally limited to one --symbol.
 
-Docs Link: ` + docBase + "Cancel-All-Orders",
+Docs Link: ` + docBase + "Cancel-All-Order",
 		RunE: cancelAll,
 	}
 
@@ -91,7 +91,7 @@ Docs Link: ` + docBase + "Cancel-All-Orders",
 		Short: "List futures trade fills",
 		Long: `List futures trade fills, bounded to a 90-day access window.
 
-Docs Link: ` + docBase + "Get-Fill-History",
+Docs Link: ` + docBase + "Get-Order-Fills",
 		RunE: listFills,
 	}
 
@@ -106,7 +106,7 @@ Docs Link: ` + docBase + "Get-Fill-History",
 		Short:   "List open positions",
 		Long: `List the account's open futures positions in the category.
 
-Docs Link: ` + docBase + "Get-Position-Info",
+Docs Link: ` + docBase + "Get-Position",
 		RunE: listPositions,
 	}
 
@@ -115,7 +115,7 @@ Docs Link: ` + docBase + "Get-Position-Info",
 		Short: "List closed positions",
 		Long: `List closed/historical futures positions, bounded to a 90-day window.
 
-Docs Link: ` + docBase + "Get-Positions-History",
+Docs Link: ` + docBase + "Get-Position-History",
 		RunE: positionHistory,
 	}
 

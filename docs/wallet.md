@@ -19,7 +19,7 @@ Account types used by transfers: `spot`, `p2p`, `coin_futures`, `usdt_futures`,
 - [withdraw cancel](#withdraw---cancel)
 
 ## transfer
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Transfer>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/transfer>
 
 Transfer a coin between two account types within the same account.
 
@@ -41,7 +41,7 @@ Exec: `./bitget-cli UTA wallet transfer --fromType=spot --toType=usdt_futures --
 - `--clientOid`: client transaction id
 
 ## transferable-coins
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Transfer>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/transfer/Get-Transfer-Coins>
 
 List the coins transferable between two account types.
 
@@ -56,7 +56,7 @@ Exec: `./bitget-cli UTA wallet transferable-coins --fromType=spot --toType=usdt_
 ```
 
 ## deposit - address
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Deposit>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/deposit/Get-Deposit-Address>
 
 Get the on-chain deposit address for a coin, optionally on a chain.
 
@@ -70,7 +70,7 @@ Exec: `./bitget-cli UTA wallet deposit address --coin=USDT [--chain=trc20]`
 ```
 
 ## deposit - records
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Deposit>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/deposit/Get-Deposit-Records>
 
 List deposit records. The time window defaults to the last 30 days.
 
@@ -82,7 +82,7 @@ Exec: `./bitget-cli UTA wallet deposit records [--coin=USDT] [--limit=20]`
 - `--limit, -l`: max records
 
 ## withdraw - create
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/withdrawal>
 
 Submit a withdrawal (on-chain or internal). Use with care.
 
@@ -105,21 +105,21 @@ Submit a withdrawal (on-chain or internal). Use with care.
 - `--remark`, `--clientOid`
 
 ## withdraw - records
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/withdrawal/Get-Withdrawal-Records>
 
 List withdrawal records. The time window defaults to the last 30 days.
 
 Exec: `./bitget-cli UTA wallet withdraw records [--coin=USDT] [--limit=20]`
 
 ## withdraw - address
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/withdrawal/Get-Withdraw-Address>
 
 List the saved withdrawal address book entries.
 
 Exec: `./bitget-cli UTA wallet withdraw address [--coin=USDT] [--type=EVM]`
 
 ## withdraw - cancel
-Docs Link: <https://www.bitget.com/api-doc/uta/account/Withdrawal>
+Docs Link: <https://www.bitget.com/api-doc/uta/account/withdrawal/Cancel-Withdrawal>
 
 Cancel a withdrawal still within its cooling-off period.
 
