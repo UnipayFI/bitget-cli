@@ -1,5 +1,5 @@
-github.com/UnipayFI/go-bitget v0.20261028.0 h1:RlHiWPR8tNhlsLn4hZeiHIOggxBaDUmqpyEwkOML1vs=
-github.com/UnipayFI/go-bitget v0.20261028.0/go.mod h1:btv/NNRgTUsbEs1VLBT1r6rX1ISLBywjGG4OVufXUg8=
+github.com/UnipayFI/go-bitget v0.20261117.0 h1:AN9tLU6ZYU1X2V8uoTTetwCLD2mmtNZoy6h4PJYLzI4=
+github.com/UnipayFI/go-bitget v0.20261117.0/go.mod h1:btv/NNRgTUsbEs1VLBT1r6rX1ISLBywjGG4OVufXUg8=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/fatih/color v1.15.0 h1:kOqh6YHBtK8aywxGerMG2Eq3H6Qgoqeo13Bk2Mv/nBs=
 github.com/fatih/color v1.15.0/go.mod h1:0h5ZqXfHYED7Bhv2ZJamyIOUej9KtShiJESRwBDUSsw=
